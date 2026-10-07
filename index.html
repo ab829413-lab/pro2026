@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Etsy Profit Radar</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f1f4f8;--card:#fff;--ink:#16213a;--mut:#5d6b82;--line:#dbe2ec;--ac:#5b3df5;--on:#fff;--ok:#12805a;--wn:#a55f00;--bd:#c42b2b;--okb:#dff5ea;--wnb:#fdf0d5;--bdb:#fde3e3;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1624;--card:#18223a;--ink:#e8edf7;--mut:#9aa8c2;--line:#2a3652;--ac:#9a86ff;--on:#10172a;--ok:#4cd39b;--wn:#f0b04a;--bd:#ff7b7b;--okb:#12382d;--wnb:#3b2d10;--bdb:#442022}}
+:root[data-theme="dark"]{--bg:#0f1624;--card:#18223a;--ink:#e8edf7;--mut:#9aa8c2;--line:#2a3652;--ac:#9a86ff;--on:#10172a;--ok:#4cd39b;--wn:#f0b04a;--bd:#ff7b7b;--okb:#12382d;--wnb:#3b2d10;--bdb:#442022}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.6 'IBM Plex Sans Arabic',system-ui,-apple-system,Segoe UI,Roboto,Tahoma,sans-serif}
+main{max-width:1020px;margin:auto;padding:16px}
+h1{font-size:28px;margin:6px 0 4px}h2{font-size:16px;margin:0 0 10px}
+.sub{color:var(--mut);margin:0 0 14px}
+.g{display:grid;gap:14px}.col{display:grid;gap:14px;align-content:start}
+@media(min-width:820px){.g{grid-template-columns:5fr 6fr;align-items:start}}
+.c{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+.f{display:grid;grid-template-columns:1fr 1fr;gap:10px}.w{grid-column:1/-1}
+label{display:block;font-size:13px;color:var(--mut)}
+input,select{width:100%;margin-top:3px;padding:9px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;font-size:16px}
+input[type=number],#cur{direction:ltr;text-align:left}
+input:focus-visible,select:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+summary{cursor:pointer;font-weight:600;margin-bottom:8px}
+.n{direction:ltr;unicode-bidi:isolate;display:inline-block;font-variant-numeric:tabular-nums}
+.r{display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-bottom:1px dashed var(--line)}
+.r.t{font-weight:700;border-bottom:2px solid var(--ink)}
+.r.s{color:var(--mut);font-size:13px;border:0;padding:10px 0 0}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.big{font-size:38px;font-weight:700;line-height:1.15}
+.pill{padding:2px 12px;border-radius:99px;font-size:13px;font-weight:600}
+.ok{background:var(--okb);color:var(--ok)}.wn{background:var(--wnb);color:var(--wn)}.bd{background:var(--bdb);color:var(--bd)}
+.bar{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:10px 0 4px;background:var(--line)}
+.lg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--mut);margin-bottom:8px}
+.k{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.k div{background:var(--bg);border-radius:10px;padding:10px}.k small{display:block;color:var(--mut);font-size:12px}.k b{font-size:18px}
+.tip{margin:8px 0 0;padding:9px 12px;border-radius:10px;background:var(--wnb);color:var(--ink);font-size:14px}
+table{width:100%;border-collapse:separate;border-spacing:3px;text-align:center;font-size:13px}
+td{padding:8px 2px;border-radius:6px;font-weight:600}th{font-weight:600;color:var(--mut);font-size:12px}
+button{font:inherit;font-weight:600;padding:10px 14px;border:0;border-radius:8px;background:var(--ac);color:var(--on);cursor:pointer}
+button.sec{background:none;color:var(--ink);border:1px solid var(--line);padding:6px 12px}
+button.sec[aria-pressed=true]{background:var(--ac);color:var(--on);border-color:var(--ac)}
+button.x{background:none;color:var(--bd);border:1px solid var(--line);padding:1px 8px;font-size:12px;margin-inline-start:6px}
+.foot{color:var(--mut);font-size:12px;margin:14px 0 0}
+.bn{background:var(--card);border:1px solid var(--ac);border-radius:14px;padding:10px 14px;margin-bottom:14px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between}
+.bn a.btn{display:inline-block;padding:9px 14px;border-radius:8px;background:var(--ac);color:var(--on);font-weight:600;text-decoration:none}
+.bn details{width:100%}.bn .r2{display:flex;gap:8px;align-items:center}.bn .r2 input{margin:0}
+.lk{opacity:.55;position:relative}.lk::after{content:"🔒";position:absolute;inset-inline-end:8px;top:6px}
+.er{color:var(--bd);font-size:13px;margin:4px 0 0}
+</style>
+</head>
+<body>
+<main>
+<div class="top"><h1 data-k="title"></h1><div><button class="sec" data-l="en">EN</button> <button class="sec" data-l="ar">العربية</button></div></div>
+<p class="sub" data-k="sub"></p>
+<div class="bn" id="bn"></div>
+<div class="g">
+<div class="col">
+<section class="c"><h2 data-k="prod"></h2><div class="f" id="fa"></div></section>
+<details class="c"><summary data-k="fees"></summary><div class="f" id="fb"></div></details>
+</div>
+<div class="col">
+<section class="c">
+<div class="top"><h2 id="tt" style="margin:0"></h2><span class="pill" id="pl"></span></div>
+<div class="big" id="bg"></div>
+<div class="sub" id="mg" style="margin:0"></div>
+<div class="bar" id="br"></div><div class="lg" id="lg"></div>
+<div id="rc"></div>
+<p style="margin:12px 0 0"><button id="sv" data-k="save"></button></p>
+</section>
+<section class="c"><h2 data-k="kT"></h2><div class="k" id="kp"></div><div id="tp"></div></section>
+<section class="c"><h2 data-k="hmT"></h2><p class="sub" style="margin-bottom:6px" data-k="hmD"></p><div id="hm"></div></section>
+<section class="c"><div class="top"><h2 data-k="lsT"></h2><button class="sec" id="ex" data-k="csv"></button></div><div id="ls"></div></section>
+</div>
+</div>
+<section class="c" id="sl" hidden></section>
+<p class="foot" data-k="foot"></p>
+</main>
+<script>
+const T={en:{bF:'Free plan: save {a} products, survival map preview',bT:'Pro trial: {a} days left',bP:'Pro unlocked. Thank you!',trial:'Start free 7-day Pro trial',buy:'Get Pro for {a}',haveKey:'I have a license key',act:'Activate',keyPh:'EPR-XXXX-XXXX-XXXX-XXXX',keyBad:'This key is not valid. Check it and try again.',pro:'Pro',lockMap:'Unlock Pro to see the full survival map.',limit:'The free plan saves {a} products. Unlock Pro to save more.',lockCsv:'CSV export is a Pro feature. Start the free trial or unlock Pro.',
+title:'Etsy Profit Radar',sub:'See what you really keep from every Etsy sale after fees, Offsite Ads, sales and shipping, and set a price that never loses you money.',prod:'Product',fees:'Etsy fees (editable)',ctry:'Your Etsy country (bank account)',tier:'Your shop sales, last 12 months',c_us:'United States',c_uk:'United Kingdom',c_ca:'Canada',c_au:'Australia',c_de:'Germany / Eurozone',c_ot:'Other (enter manually)',t15:'Under $10k: Offsite Ads 15%',t12:'$10k or more: Offsite Ads 12% (mandatory)',
+nm:'Product name',pr:'List price (before sale)',sh:'Shipping the buyer pays',cg:'Materials cost',pk:'Packaging',hr:'Hours per item',wg:'Your target hourly pay',ps:'Actual postage cost',ds:'Sale discount %',os:'Orders from Offsite Ads %',ad:'Etsy Ads cost per order',tm:'Target profit margin %',vol:'Expected sales per month',
+cur:'Currency symbol',tx:'Transaction fee %',pp:'Payment processing %',pf:'Processing flat fee',lf:'Listing fee',cv:'Currency conversion % (2.5 if listing currency differs)',rg:'Regulatory operating fee %',vt:'VAT on fees %',of:'Offsite Ads rate %',
+demo:'Hand-poured soy candle',noname:'Unnamed product',good:'Profitable',weak:'Thin margin',loss:'Losing money',net:'Net profit per order, margin',
+r0:'Price after sale',r1:'Shipping paid by buyer',r2:'Order total',r3:'Etsy fees',r4:'Transaction fee',r5:'Payment processing',r6:'Listing fee',r7:'Currency conversion and regulatory fee',r8:'Offsite Ads (expected)',r9:'Etsy Ads',r10:'VAT on fees',r11:'Your costs',r12:'Materials',r13:'Packaging',r14:'Your labor',r15:'Actual postage',r16:'Net profit',
+fl:'Etsy fees',co:'Your costs',pf2:'Your profit',save:'Save to my list',kT:'Numbers that set your price',k1:'Monthly profit',k2:'Real hourly pay',k3:'Break-even price (before sale)',k4:'Price for your target margin',k5:'Max safe discount',k6:'Max Etsy Ads spend per order',
+hmT:'Survival map: profit per order',hmD:'Each cell mixes a sale discount with a share of orders from Offsite Ads. Green meets your target margin, amber falls short, red loses money.',hmS:'Sale',hmO:'Offsite Ads',
+lsT:'My products',lsE:'No products yet. Calculate one, then tap "Save to my list".',lsTot:'Total monthly profit',lsBad:'Losing products',del:'Delete',csv:'Export CSV',hN:'Net profit per order',hM:'Margin %',
+p1:'Shipping costs you {a} more than the buyer pays on every order. Build it into your price.',p2:'You lose money on every order at this price. Raise the price, cut the discount, or opt out of Offsite Ads if you can.',p3:'Your {a} discount is above the safe limit of {b} for your target margin.',p4:'If all your orders came from Offsite Ads you would lose {a} per order.',p5:'Fees plus your target margin exceed 100%. Lower the target margin.',
+foot:'Starting rates follow Etsy fee pages (Oct 2026): US 3% + $0.25, UK 4% + £0.20, Canada 3% + CA$0.25, Australia 3% + A$0.25, Germany 4% + €0.30. Listing fee $0.20. Transaction fee 6.5% of item plus shipping. Offsite Ads 15% (12% at $10k+ a year), capped at $100 per order. Regulatory fees: UK 0.32%, Canada 1.15%. Rates change and vary by account, so confirm them in Etsy under Fees and payments. Your list is saved in this browser only.'},
+ar:{bF:'الخطة المجانية: حفظ {a} منتجات ومعاينة خريطة النجاة',bT:'تجربة Pro: متبقٍ {a} يوم',bP:'تم تفعيل Pro. شكراً لك!',trial:'ابدأ تجربة Pro مجانية لمدة 7 أيام',buy:'احصل على Pro بـ {a}',haveKey:'لدي مفتاح ترخيص',act:'تفعيل',keyPh:'EPR-XXXX-XXXX-XXXX-XXXX',keyBad:'المفتاح غير صحيح. تحقق منه وحاول مجدداً.',pro:'Pro',lockMap:'فعّل Pro لرؤية خريطة النجاة كاملة.',limit:'الخطة المجانية تحفظ {a} منتجات. فعّل Pro لحفظ المزيد.',lockCsv:'تصدير CSV ميزة Pro. ابدأ التجربة المجانية أو فعّل Pro.',
+title:'رادار أرباح إتسي',sub:'اعرف ما تكسبه فعلاً من كل طلب على Etsy بعد الرسوم والإعلانات الخارجية والتخفيضات والشحن، وحدّد السعر الذي لا يخسرك.',prod:'بيانات المنتج',fees:'رسوم Etsy (قابلة للتعديل)',ctry:'بلد حسابك في Etsy (حساب البنك)',tier:'مبيعات متجرك آخر 12 شهراً',c_us:'الولايات المتحدة',c_uk:'المملكة المتحدة',c_ca:'كندا',c_au:'أستراليا',c_de:'ألمانيا / منطقة اليورو',c_ot:'بلد آخر (أدخل يدوياً)',t15:'أقل من 10 آلاف $: إعلانات خارجية 15%',t12:'10 آلاف $ أو أكثر: إعلانات خارجية 12% (إجباري)',
+nm:'اسم المنتج',pr:'سعر البيع قبل الخصم',sh:'شحن يدفعه المشتري',cg:'تكلفة المواد',pk:'التغليف',hr:'ساعات العمل للقطعة',wg:'أجرك المستهدف للساعة',ps:'تكلفة الشحن الفعلية',ds:'خصم التخفيضات %',os:'طلبات من الإعلانات الخارجية %',ad:'إعلانات Etsy لكل طلب',tm:'هامش الربح المستهدف %',vol:'مبيعات شهرية متوقعة',
+cur:'رمز العملة',tx:'عمولة المعاملة %',pp:'معالجة الدفع %',pf:'معالجة ثابتة',lf:'رسم القائمة',cv:'تحويل العملة % (2.5 إذا اختلفت عملة القائمة)',rg:'رسوم تنظيمية %',vt:'ضريبة على الرسوم %',of:'الإعلانات الخارجية %',
+demo:'شمعة صويا يدوية',noname:'منتج بدون اسم',good:'رابح',weak:'هامش ضعيف',loss:'تخسر',net:'صافي ربح الطلب الواحد، بهامش',
+r0:'سعر البيع بعد الخصم',r1:'شحن يدفعه المشتري',r2:'إجمالي الطلب',r3:'رسوم Etsy',r4:'عمولة المعاملة',r5:'معالجة الدفع',r6:'رسم القائمة',r7:'تحويل العملة والرسوم التنظيمية',r8:'إعلانات خارجية (متوقعة)',r9:'إعلانات Etsy',r10:'ضريبة على الرسوم',r11:'تكاليفك',r12:'مواد',r13:'تغليف',r14:'أجر عملك',r15:'شحن فعلي',r16:'صافي الربح',
+fl:'رسوم Etsy',co:'تكاليفك',pf2:'ربحك',save:'احفظ في قائمتي',kT:'أرقام تحدد سعرك',k1:'ربح الشهر المتوقع',k2:'أجرك الفعلي بالساعة',k3:'سعر التعادل (قبل الخصم)',k4:'السعر لهامشك المستهدف',k5:'أقصى خصم آمن',k6:'أقصى إنفاق على إعلانات Etsy للطلب',
+hmT:'خريطة النجاة: ربح الطلب الواحد',hmD:'كل خلية تجمع نسبة تخفيض مع نسبة طلبات من الإعلانات الخارجية. أخضر يحقق هامشك، أصفر أقل منه، أحمر خسارة.',hmS:'التخفيض',hmO:'إعلانات خارجية',
+lsT:'منتجاتي',lsE:'لا منتجات بعد. احسب منتجاً ثم اضغط «احفظ في قائمتي».',lsTot:'ربح شهري إجمالي',lsBad:'منتجات تخسر',del:'حذف',csv:'تصدير CSV',hN:'صافي ربح الطلب',hM:'الهامش %',
+p1:'الشحن يكلّفك {a} فوق ما يدفعه المشتري في كل طلب. أدمجه في السعر.',p2:'تخسر في كل طلب بهذا السعر. ارفع السعر أو قلّل التخفيض أو أوقف الإعلانات الخارجية إن أمكن.',p3:'تخفيضك {a} أعلى من الحد الآمن {b} لهامشك المستهدف.',p4:'لو جاءت كل طلباتك من الإعلانات الخارجية لخسرت {a} في الطلب.',p5:'الرسوم والهامش المستهدف معاً يتجاوزان 100%. خفّض الهامش المستهدف.',
+foot:'الرسوم الافتراضية من صفحات رسوم Etsy (أكتوبر 2026): أمريكا 3% + 0.25$، بريطانيا 4% + £0.20، كندا 3% + CA$0.25، أستراليا 3% + A$0.25، ألمانيا 4% + €0.30. رسم القائمة 0.20$. عمولة المعاملة 6.5% على السلعة والشحن. الإعلانات الخارجية 15% (12% عند 10 آلاف $ سنوياً) بسقف 100$ للطلب. الرسوم التنظيمية: بريطانيا 0.32% وكندا 1.15%. الرسوم تتغير وتختلف بين الحسابات، فتأكد منها في Etsy ضمن Fees and payments. تُحفظ قائمتك في هذا المتصفح فقط.'}};
+const $=i=>document.getElementById(i),v=i=>parseFloat($(i).value)||0;
+const CFG={buy:'https://payhip.com/b/lEr4q',price:'$19',trial:7,free:3,salt:'epr-d0d0b6a56c12',keys:['2403f1d0dd7ae197','e2b9075297fc6b57','ca61565dd82304a8','2d90166b8ffe0808','a693872d61de8da5','7d582e2ae55a31f4','ae743bddccdc5cd3','ac00761285fe2d32','867740ddc8aa638d','36b8821c1babcfa0','720ac2573240c32c','3a2764d2210e27e3','06bcf202f6afe01e','19cbfa280e3c924e','5101b11f2225884a','ccbac18ee7e75cde','e35383151db53a0a','95e846d3f5c29b54','4c471cc02433f1f2','ef9823bb4abaae66','337734fbd15c9e6b','6a5e6d282ca8e145','8192b45501e45ea4','bda8140e9805c26f','426feafc2273fc8a','4809752df28fa0e5','2346418e4d8493d2','7e40b541d8c2435d','4d25b0d2d3a0de0c','2dd91b1a853f3105','d768195f0b3d4448','8e2e7a6c0e1e3d30','51ccb3b1b77b55c8','97efc691963a026e','2259f279cff5abac','b77b31458c3f2350','a0f130b962e0438c','7ba0f3d293b81c4f','772642564335dd8f','3f33122217983166','43e3b7c6fa2e03fd','d4d57798ec510e82','40c5faea1e326d1b','42908d8a6a04d555','bfb3ca73ac35d8a8','524a927912efe5ed','cec09996142e6ba2','f7ed78a310b3c91f','50c3983053b0c959','de0879fd4f8c8eaa','fe491a2f723fe2f4','b535bffccbc72825','0e04fdbd74be9167','2dc7263162839b44','6dc291f78f947097','4323ba85432dd646','a86d919be68fc752','e77da0303803f010','5ff8d557ddd55e2e','531a9b824e51e9bb','36f39b31ca090499','b017b9fef263aaa6','e819b8d45a54cbe5','0a4eebce7a2a3fc1','76d53f9d260c8c3c','e2787683be21cea0','2c0b5fe70a21ddcb','8f12703086cd545a','e93a9125a0399077','24a920c03b9e2c62','7a34092192c06aca','b90ddfb2ef1b8fe2','f05d8e9362081401','b4f927a3cbaa8e94','06dbf14b745a3e13','0ffabfc597c47772','643c8605503d554a','5b387e6b38ad1efc','3b7fcc32158743e9','ee6493e671e9a57d','9a5c53df344cc87c','26465ac4a8f9bcd2','5f8ac016f8ccb242','9682fb5a6ac5b4fc','294c473aac74a1f1','5d75f90bc841ba17','7549e2a40a589010','69d1c4438cabfe32','fef6032b0749c0fb','9273aec0242318cd','09907310f94c8207','a803af6b8ed04c7b','6430185ad894cc5a','178f162ac2b5406c','dec49eea237c4441','0114fb56fcd79f5b','9c484711bf99658e','548fdc8f2ccdc65c','61ed845b56368239','912fa1138e5c451d','e21355ebdfbda2bc','c58b8fe217b4640d','2535dd02b711ab72','0bbe34623c6aee54','5e4e9c1251ce6352','526fed22f25ee60f','4399602445989f07','9680d745d514a59e','0d70e2a0c2ae3734','7a3d79284eb5ee76','faad152e046bfdf4','5286fd01e39dea03','b67493b4a4a2f658','b949a62ca1cffb0f','b168bd74b2428dfa','991f66b365bcb65f','8dfc46597e78a4fe','e2f884c52a30b11a','4701af7b99f1922b','0cdf82bfedd1686c','13f8efdb352cf441','3ffca325ef0694ec','b881b64e2b977b9e','8eb6265103a3dfea','390eb89fc59af252','6e2eb9664b44dae2','a46115cc5ee0c66f','a531ce9cb1c38eee','a1f97de493efe8ea','38e68e6def4bfedd','e3fb6e9883d02c09','c72382db25408a68','9361ed7a2a6e8c9d','802559f786a1995b','205ab7be768637b3','a65258e8e404dc37','21b601e60664ae5c','ada052278093d3a0','d2abd38e8cf89b4f','43737542d62f5397','4512ce79e809aee9','aae5711dcdb6e4f6','2098995608c56c11','89429ed835615a39','f682553f0391f4df','87c797598cfb556c','4179c542afa31c6e','324026aa259f7da8','c7f1e67e31e2f349','941bc285dd6f76d0','448b60d1b6e214ae','02ce5b97d9e17a9a','0284caeebe522498','b4d3f0f22c882a47','094efe3bea37d3e2','6eb5b5eb4fc5b1db','4b71410bbc5a8226','6de8407e9124fdfc','45b6f99d823a3769','82d8d48676d86581','f84712c54d3f36d5','c4e86ccaa4883c7a','ce75ffe87fb5b616','aa5334fabbf4b2d0','c054d68a4636876e','c93ec763f2bd4c1f','6bae28ccf4957202','9f21df87f9d4d781','6c1310a726aae467','a765a7160d77c2be','3f0d26be9e34a4a5','5e8679fd38a75d28','33c90c821a052ffa','c116cf5c549fcc8a','a31fb65d3a4ddd0a','6492803e703955b2','f40fdb87ee1ec6eb','74c9b1b727fd9a35','ae2678aa5a5fcc69','ced06314d8516c26','94c402c4fded0627','cc26d26e9964c548','8a7cddcb0b85e661','f8ab09cb2ea15c2f','ed5c1a29c95fe0f0','5ed545c70586b43f','4fbb619a1898fe91','bce54c3ac80915fc','d982b1a55da3737a','509a888b09293d42','cefe4eebe90a7615','e847287b3b2436bf','4db836916446a3ad','288509dd3b481efb','bc65e97a7e0df52e','35cfbc96dcfa4e9f','3b0235b4a31d8e0e','f78bd32dafa99dc5','dd53e7ec240697f5','146afcb4ece58c50','797a65be246f1406','960153b40f0972d3','93a13cc0170f15d1','cd8c276cfa1be49d','9dc8b99820209d57','5eaa9b7d3243a898','3c13824e77aef26b','04b69b02cfc72a91','0e6c4d33a9759a49','042c333e91eedee0','d7dbf179433c3455','483cb98c08b942bf','baffafbc34333a2a','e5660efc53574b92','aaed63fec6382866','dd82fe0992fe9bce','2928790a5d099081','6ec6de73a56938f3','ed2026fc86038507','c597b49497d9d381','f396d9ce39cec060','6649bbd8625a1840','82eccdd0e95865fe','ecab0c3c86a7cee3','4aad04e7313db8c5','d6283de0e6cae1d1','384bdb7a9138805b','5c5201e668381705','8e198820ba4c9861','8681544ff15fa7df','ca72c81f5db7c264','f8db0c69492fa4c0','10919bbe8d577522','9395c329fbd1366f','69c55084df02000e','60bd6e4498002e04','3a18c4c14c964cf8','d3fb23ed25d99aa8','39882a8ce89b9d1e','606f8eb60b85ff45','4f3c4fdfc69ab70c','b17b5ac50d969672','07fdcc54186d1444','621b1c5b430ed733','0ffe9479c9aa7784','c9a6ac8002bb762f','a5de416280c8ea26','cb766661a2c1919d','f6d48bd86b5686e8','38b791330b924f01','3c5621a7260c5d9a','ed783a50641d0671','1db609486e38fdb0','92ab33f75971e15f','5a2f325d6b6227c4','e34a11550cf732cc','151cd97d66f4aee8','7988bc06e1a5e5ff','fe235397e817f23e','618bc2f5aa675870','1fa2f0eb9e6d5450','3ad07ab6b1e51643','45de6ac3cd3bbed8','7a56cbe03b27043f','90fe6fbdbc25050e','18e6139ed894b82d','f4fb90468b23d5d8','caf96fab1da85452','95235466cfab2822','b81876c88a265ed5','d69894ad5cbbe4dd','e75cd749eb570bb9','d2d786e52b78bfa0','3fdb1aef6f2cd36c','2f234fc59a022d9a','f9e4d639cf6b6d64','06ea52a0c3123a89','080cab364dc8b8b9','cefcece8da8e3082','27b01e5f0a8bd77c','c766af83a11c0777','927ef7a0431f2236','4ae0332ec7764d60','3d3211db448adb1a','188744b6c9344fd0','26dd2247a7e04a12','eaa2fda4552557ae','cfb16dadd434a81c','9abf673f68330de2','b63fed4b71ca0f08','166f50f8a4a6deda','b2ecfc544cd28d16','8c09a6b6032dc28f','3eed7c8e8396bc5c','ff852c484d6595d1','20d3f904362bdd9b','53224f8e186d4b5a','39f2152000a8e036','6c38ce1001726392','bec45e39aa1f6fca']};
+const norm=k=>k.toUpperCase().replace(/[^A-Z0-9]/g,'');
+const H=async s=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(CFG.salt+s)))].map(b=>b.toString(16).padStart(2,'0')).join('').slice(0,16);
+let LS={k:'',t:0},plan='free',left=0,msg='';
+try{LS={k:localStorage.getItem('eprK')||'',t:+localStorage.getItem('eprT')||0}}catch(e){}
+let L='en';try{L=localStorage.getItem('eprL')||'en'}catch(e){}
+const t=k=>T[L][k]||T.en[k]||k,f=(k,o)=>t(k).replace(/\{(\w)\}/g,(_,c)=>o[c]);
+const V={pr:34,sh:0,cg:6.5,pk:1.2,hr:0.75,wg:12,ps:4.5,ds:10,os:30,ad:0,tm:25,vol:40},W={cur:'$',tx:6.5,pp:3,pf:0.25,lf:0.2,cv:0,rg:0,vt:0,of:15};
+const C={us:{pp:3,pf:0.25,rg:0,cur:'$'},uk:{pp:4,pf:0.2,rg:0.32,cur:'£'},ca:{pp:3,pf:0.25,rg:1.15,cur:'CA$'},au:{pp:3,pf:0.25,rg:0,cur:'A$'},de:{pp:4,pf:0.3,rg:0,cur:'€'}};
+const inp=i=>{const txt=i=='nm'||i=='cur';return`<label${i=='nm'?' class="w"':''}><span data-k="${i}"></span><input id="${i}" value="${V[i]??W[i]??''}"${i=='nm'?' dir="auto"':''}${txt?'':' type="number" step="any" inputmode="decimal"'}></label>`};
+const sel=(i,o)=>`<label class="w"><span data-k="${i}"></span><select id="${i=='ctry'?'ct':'tr'}">${o.map(x=>`<option value="${x}" data-k="${x.length>2?x:'c_'+x}"></option>`).join('')}</select></label>`;
+$('fa').innerHTML=sel('ctry',['us','uk','ca','au','de','ot'])+sel('tier',['t15','t12'])+['nm','pr','sh','cg','pk','hr','wg','ps','ds','os','ad','tm','vol'].map(inp).join('');
+$('fb').innerHTML=['cur','tx','pp','pf','lf','cv','rg','vt','of'].map(inp).join('');
+let cur='$',last=null,items=[];
+try{items=JSON.parse(localStorage.getItem('epr')||'[]')}catch(e){}
+const sv=()=>{try{localStorage.setItem('epr',JSON.stringify(items))}catch(e){}};
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const m$=n=>(n<0?'−':'')+cur+Math.abs(n).toFixed(2),N=n=>`<span class="n">${m$(n)}</span>`,pc=x=>(x*100).toFixed(0)+'%';
+const cls=(net,T,tm)=>net<0?'bd':(T&&net/T<tm?'wn':'ok');
+function P(){return{L:v('pr'),S:v('sh'),cg:v('cg'),pk:v('pk'),hr:v('hr'),wg:v('wg'),ps:v('ps'),d:v('ds')/100,os:v('os')/100,ad:v('ad'),tm:v('tm')/100,vol:v('vol'),tx:v('tx'),pp:v('pp'),pf:v('pf'),lf:v('lf'),cv:v('cv'),rg:v('rg'),vt:v('vt')/100,of:v('of')}}
+function calc(p,d,s){const sale=p.L*(1-d),T=sale+p.S,f={tx:T*p.tx/100,pp:T*p.pp/100+p.pf,lf:p.lf,ot:T*(p.cv+p.rg)/100,of:Math.min(T*p.of/100,100)*s,ad:p.ad};
+f.vt=(f.tx+f.pp+f.lf+f.ot+f.of)*p.vt;const fees=f.tx+f.pp+f.lf+f.ot+f.of+f.vt+f.ad,labor=p.hr*p.wg,costs=p.cg+p.pk+labor+p.ps;
+return{sale,T,f,fees,labor,costs,net:T-fees-costs}}
+function need(p,m){const k=(p.tx+p.pp+p.cv+p.rg+p.os*p.of)/100*(1+p.vt),den=1-k-m;if(den<=0)return null;
+return(((p.pf+p.lf)*(1+p.vt)+p.ad+p.cg+p.pk+p.hr*p.wg+p.ps)/den)-p.S}
+function render(){
+cur=$('cur').value||'$';const p=P(),r=calc(p,p.d,p.os),mg=r.T?r.net/r.T:0,st=cls(r.net,r.T,p.tm);
+last={n:$('nm').value||t('noname'),net:r.net,mg,vol:p.vol};
+$('tt').textContent=last.n;$('pl').className='pill '+st;$('pl').textContent=t({ok:'good',wn:'weak',bd:'loss'}[st]);
+$('bg').style.color=`var(--${st})`;$('bg').innerHTML=N(r.net);
+$('mg').innerHTML=`${t('net')} <span class="n">${(mg*100).toFixed(1)}%</span>`;
+const tot=Math.max(r.T,r.fees+r.costs)||1;
+$('br').innerHTML=`<i style="width:${r.fees/tot*100}%;background:var(--ac)"></i><i style="width:${r.costs/tot*100}%;background:var(--mut)"></i><i style="width:${Math.max(r.net,0)/tot*100}%;background:var(--ok)"></i>`;
+$('lg').innerHTML=`<span>${t('fl')} <b class="n">${pc(r.fees/tot)}</b></span><span>${t('co')} <b class="n">${pc(r.costs/tot)}</b></span><span>${t('pf2')} <b class="n">${pc(Math.max(r.net,0)/tot)}</b></span>`;
+const R=[[0,r.sale],[1,p.S],[2,r.T,'t'],[3,,'s'],[4,-r.f.tx],[5,-r.f.pp],[6,-r.f.lf],[7,-r.f.ot],[8,-r.f.of],[9,-r.f.ad],[10,-r.f.vt],[11,,'s'],[12,-p.cg],[13,-p.pk],[14,-r.labor],[15,-p.ps],[16,r.net,'t']];
+$('rc').innerHTML=R.filter(x=>x[2]||Math.abs(x[1])>1e-9).map(x=>`<div class="r ${x[2]||''}"><span>${t('r'+x[0])}</span>${x[2]=='s'?'':N(x[1])}</div>`).join('');
+const be=need(p,0),tg=need(p,p.tm),lp=s=>s==null?'—':N(s/(1-p.d)),dm=tg==null?null:Math.max(0,1-tg/p.L),ma=Math.max(0,r.net+p.ad-p.tm*r.T);
+const K=[[1,N(r.net*p.vol)],[2,p.hr>0?N((r.net+r.labor)/p.hr):'—'],[3,lp(be)],[4,lp(tg)],[5,dm==null?'—':`<span class="n">${pc(dm)}</span>`],[6,N(ma)]];
+$('kp').innerHTML=K.map(x=>{const lc=plan=='free'&&x[0]>4;return`<div${lc?' class="lk"':''}><small>${t('k'+x[0])}</small><b>${lc?t('pro'):x[1]}</b></div>`}).join('');
+const Q=[],worst=calc(p,p.d,1);
+if(p.ps>p.S)Q.push(f('p1',{a:m$(p.ps-p.S)}));
+if(r.net<0)Q.push(t('p2'));else if(dm!=null&&p.d>dm)Q.push(f('p3',{a:pc(p.d),b:pc(dm)}));
+if(r.net>=0&&worst.net<0)Q.push(f('p4',{a:m$(-worst.net)}));
+if(tg==null)Q.push(t('p5'));
+$('tp').innerHTML=Q.map(x=>`<p class="tip">${x}</p>`).join('');
+const D=plan=='free'?[0,0.1]:[0,0.1,0.2,0.3,0.4],O=[0,0.25,0.5,1];
+$('hm').innerHTML='<table><tr><th>'+t('hmS')+'</th>'+O.map(o=>`<th>${t('hmO')} ${pc(o)}</th>`).join('')+'</tr>'+D.map(d=>`<tr><th>${pc(d)}</th>`+O.map(o=>{const c=calc(p,d,o);return`<td class="${cls(c.net,c.T,p.tm)}"><span class="n">${m$(c.net)}</span></td>`}).join('')+'</tr>').join('')+'</table>'+(plan=='free'?`<p class="tip">🔒 ${t('lockMap')}</p>`:'')}
+function list(){const s=items.reduce((a,x)=>a+x.net*x.vol,0),bad=items.filter(x=>x.net<0).length;
+$('ls').innerHTML=(msg?`<p class="tip">${f(msg,{a:CFG.free})}</p>`:'')+(items.length?`<div class="r t"><span>${t('lsTot')}</span>${N(s)}</div>`+(bad?`<div class="r"><span>${t('lsBad')}</span><b class="n" style="color:var(--bd)">${bad}</b></div>`:'')+items.map((x,i)=>`<div class="r"><span>${esc(x.n)} <small class="n">${(x.mg*100).toFixed(0)}%</small></span><span>${N(x.net)}<button class="x" data-i="${i}">${t('del')}</button></span></div>`).join(''):`<p class="sub" style="margin:0">${t('lsE')}</p>`)}
+function setLang(l){L=l;try{localStorage.setItem('eprL',l)}catch(e){}document.documentElement.lang=l;document.documentElement.dir=l=='ar'?'rtl':'ltr';
+document.querySelectorAll('[data-k]').forEach(e=>e.textContent=t(e.dataset.k));
+document.querySelectorAll('[data-l]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l==l));
+$('nm').placeholder=t('demo');document.title=t('title');render();list();bar()}
+async function dl(name,text,type){try{const d=window.claude&&await claude.use('downloads');if(d){await d.save({filename:name,data:text});return}}catch(e){if(e&&e.code=='declined')return}
+const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;a.click()}
+$('ex').onclick=()=>{if(plan=='free'){msg='lockCsv';list();return}if(!items.length)return;const q=s=>`"${String(s).replace(/"/g,'""')}"`;
+const rows=[[t('nm'),t('hN'),t('hM'),t('vol'),t('k1')]].concat(items.map(x=>[x.n,x.net.toFixed(2),(x.mg*100).toFixed(1),x.vol,(x.net*x.vol).toFixed(2)]));
+dl('etsy-profit-radar.csv','\ufeff'+rows.map(r=>r.map(q).join(',')).join('\n'),'text/csv')};
+$('sv').onclick=()=>{if(plan=='free'&&items.length>=CFG.free){msg='limit';list();return}msg='';items.push({...last});sv();list()};
+$('ls').onclick=e=>{const i=e.target.dataset.i;if(i!=null){items.splice(i,1);sv();list()}};
+$('ct').onchange=e=>{const c=C[e.target.value];if(c)for(const k in c)$(k).value=c[k];render()};
+$('tr').onchange=e=>{$('of').value=e.target.value=='t12'?12:15;render()};
+document.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>setLang(b.dataset.l));
+document.addEventListener('input',render);setLang(L);chk();
+async function chk(){plan='free';try{if(LS.k&&CFG.keys.includes(await H(norm(LS.k))))plan='pro';else if(LS.t){left=Math.ceil(CFG.trial-(Date.now()-LS.t)/864e5);if(left>0)plan='trial'}}catch(e){}bar();render();list()}
+function bar(){const b=$('bn');if(plan=='pro'){b.innerHTML=`<b>✓ ${t('bP')}</b>`;return}
+b.innerHTML=`<span>${plan=='trial'?f('bT',{a:left}):f('bF',{a:CFG.free})}</span><span class="r2">${plan=='free'&&!LS.t?`<button id="tb">${t('trial')}</button>`:''}<a class="btn" href="${CFG.buy}" target="_blank" rel="noopener">${f('buy',{a:CFG.price})}</a></span><details><summary>${t('haveKey')}</summary><div class="r2"><input id="kin" dir="ltr" placeholder="${t('keyPh')}" autocomplete="off"><button id="ka">${t('act')}</button></div><p class="er" id="ke"></p></details>`}
+$('bn').onclick=async e=>{const i=e.target.id;
+if(i=='tb'){LS.t=Date.now();try{localStorage.setItem('eprT',LS.t)}catch(x){}chk()}
+if(i=='ka'){const k=$('kin').value;if(CFG.keys.includes(await H(norm(k)))){LS.k=k;try{localStorage.setItem('eprK',k)}catch(x){}chk()}else $('ke').textContent=t('keyBad')}};
+if(location.hash=='#seller'){const s=$('sl');s.hidden=false;s.innerHTML='<h2>Seller tools</h2><p class="sub">1) Generate keys. 2) Upload them to your Payhip product as pre-generated license keys, one per line. 3) Paste the hash list into CFG.keys in this file. Never share the keys list.</p><button id="gk">Generate 100 keys</button><textarea id="ko" rows="6" readonly style="width:100%;margin-top:8px;font:12px monospace"></textarea><textarea id="ho" rows="4" readonly style="width:100%;margin-top:8px;font:12px monospace"></textarea>';
+$('gk').onclick=async()=>{const A='ABCDEFGHJKMNPQRSTUVWXYZ23456789',ks=[],hs=[];for(let i=0;i<100;i++){const c=[...crypto.getRandomValues(new Uint8Array(16))].map(x=>A[x%31]).join(''),k='EPR-'+c.match(/.{4}/g).join('-');ks.push(k);hs.push(`'${await H(norm(k))}'`)}$('ko').value=ks.join('\n');$('ho').value=hs.join(',')}}
+</script>
+</body>
+</html>
